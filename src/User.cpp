@@ -194,7 +194,7 @@ void RerunRecommenderUser::incrementCurrentIndex() { currentIndex++; }
 //GENRE_RECOMMENDED_USER
 GenreRecommenderUser::GenreRecommenderUser(
         const std::string &name)
-        : User(name) {}
+        : User(name), mostPopularTags() {}
 
 GenreRecommenderUser::~GenreRecommenderUser() = default;
 
