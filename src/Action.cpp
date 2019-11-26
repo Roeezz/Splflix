@@ -65,6 +65,8 @@ void CreateUser::act(Session &sess) {
     }
     if (!sess.addUser(userName, newUser)) {
         error(getErrorMsg());
+        delete(newUser);
+        newUser = nullptr;
         return;
     }
     complete();
@@ -121,6 +123,8 @@ void DuplicateUser::act(Session &sess) {
             complete();
             return;
         }
+        delete(newUser);
+        newUser = nullptr;
     }
     error(getErrorMsg());
 }
@@ -275,6 +279,7 @@ void Watch::newRecommendation(Session &sess, Watchable *const watched) {
     } else {
         error(getErrorMsg());
     }
+    recommendation = nullptr;
 }
 
 long Watch::getNextId() const {

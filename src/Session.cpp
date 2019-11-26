@@ -76,18 +76,20 @@ void Session::extractTVContent(const nlohmann::json &j, long id) {
     }
 }
 
-void Session::createDefaultUser() {
-    auto createUser = CreateUser("default", "len");
-    createUser.act(*this);
-    std::string userName = "default";
-    activeUser = getUser(userName);
+void Session::setDefaultUser() {
+    std::string defaultName = "default";
+    if(!getUser(defaultName)) {
+        auto createUser = CreateUser("default", "len");
+        createUser.act(*this);
+    }
+    activeUser = getUser(defaultName);
 }
 
 
 //event loop
 void Session::start() {
     std::cout << "SPLFLIX is now on!" << std::endl;
-    createDefaultUser();
+    setDefaultUser();
     eventLoop();
 }
 //-private methods
@@ -293,7 +295,6 @@ void Session::clear() {
         pair_iter.second = nullptr;
     }
     userMap.clear();
-
 }
 
 void Session::copy(const Session &other) {
@@ -306,7 +307,9 @@ void Session::copy(const Session &other) {
         actionsLog.push_back(action->clone());
     }
     for (const auto &user : other.userMap) {
-        this->userMap.insert(user);
+        std::string userName = user.first;
+        auto pair =std::make_pair(userName, user.second->clone(userName));
+        this->userMap.insert(pair);
     }
 
     std::string newActiveUser = other.activeUser->getName();
