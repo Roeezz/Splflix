@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Splflix" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="$PROJECT_DIR$/config1.json" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Splflix" TARGET_NAME="Splflix" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Splflix" RUN_TARGET_NAME="Splflix">
+    <method v="2">
+      <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+    </method>
+  </configuration>
+</component>
