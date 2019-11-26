@@ -44,16 +44,16 @@ public:
     virtual void addToHistory(Watchable *watchable);
 
 protected:
-    void clear();
 
     std::vector<Watchable *> history;
 private:
-
-    const std::string name;
+    void clear();
 
     void copy(const User &other);
 
     void move(User &&other);
+
+    const std::string name;
 };
 
 

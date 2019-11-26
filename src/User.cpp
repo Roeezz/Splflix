@@ -5,10 +5,10 @@
 
 //USER
 User::User(const std::string &name)
-        : name(name) {}
+        :history(), name(name) {}
 
 User::User(const User &other)
-        : name(other.name) {
+        :history(), name(other.name) {
     copy(other);
 }
 
@@ -21,7 +21,7 @@ User &User::operator=(const User &other) {
 }
 
 User::User(User &&other)
-        : name(other.name) {
+        :history(), name(other.name) {
     move(std::move(other));
 }
 
