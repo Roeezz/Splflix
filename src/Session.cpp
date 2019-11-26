@@ -299,9 +299,6 @@ void Session::clear() {
 void Session::copy(const Session &other) {
     this->endSession = other.endSession;
 
-    std::string newActiveUser = other.activeUser->getName();
-    this->activeUser = other.activeUser->clone(newActiveUser);
-
     for (auto &watchable : other.content) {
         content.push_back(watchable->clone());
     }
@@ -311,11 +308,12 @@ void Session::copy(const Session &other) {
     for (const auto &user : other.userMap) {
         this->userMap.insert(user);
     }
+
+    std::string newActiveUser = other.activeUser->getName();
+    this->activeUser = getUser(newActiveUser);
 }
 
 void Session::move(Session &&other) {
-    activeUser = other.activeUser;
-    other.activeUser = nullptr;
     endSession = other.endSession;
     for (auto &watchable : other.content) {
         content.push_back(watchable);
@@ -329,6 +327,10 @@ void Session::move(Session &&other) {
         this->userMap.insert(user);
         user.second = nullptr;
     }
+
+    std::string newActiveUser = other.activeUser->getName();
+    this->activeUser = getUser(newActiveUser);
+    other.activeUser = nullptr;
 }
 
 //getters and setters
