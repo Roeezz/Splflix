@@ -103,7 +103,7 @@ private:
 
     void extractTVContent(const nlohmann::basic_json<> &j, long id);
 
-    void setDefaultUser();
+    void createDefaultUser();
 
     //event loop methods
     void eventLoop();

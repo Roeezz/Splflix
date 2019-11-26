@@ -7,6 +7,7 @@
 //constructors and assignments
 Session::Session(const std::string &configFilePath) : content(), actionsLog(), userMap(), activeUser(nullptr), endSession(false){
     createContent(configFilePath);
+    createDefaultUser();
 }
 
 Session::Session(const Session &other) : content(), actionsLog(), userMap(), activeUser(nullptr), endSession(false) {
@@ -76,12 +77,10 @@ void Session::extractTVContent(const nlohmann::json &j, long id) {
     }
 }
 
-void Session::setDefaultUser() {
+void Session::createDefaultUser() {
     std::string defaultName = "default";
-    if(!getUser(defaultName)) {
-        auto createUser = CreateUser("default", "len");
-        createUser.act(*this);
-    }
+    auto createUser = CreateUser(defaultName, "len");
+    createUser.act(*this);
     activeUser = getUser(defaultName);
 }
 
@@ -89,7 +88,6 @@ void Session::setDefaultUser() {
 //event loop
 void Session::start() {
     std::cout << "SPLFLIX is now on!" << std::endl;
-    setDefaultUser();
     eventLoop();
 }
 //-private methods
