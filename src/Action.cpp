@@ -6,8 +6,7 @@
 //Base Action
 
 //constructor
-BaseAction::BaseAction() : status(PENDING),
-                           errorMsg("The action could not be completed") {}
+BaseAction::BaseAction() : errorMsg("The action could not be completed") , status(PENDING) {}
 
 //Public
 ActionStatus BaseAction::getStatus() const {
@@ -46,8 +45,7 @@ BaseAction::~BaseAction() = default;
 
 //Create User
 CreateUser::CreateUser(const std::string &userName, const std::string &algorithmType) : userName(userName),
-                                                                                        algorithmType(algorithmType),
-                                                                                        BaseAction() {
+                                                                                        algorithmType(algorithmType){
 
     std::string errorMsg = "Could not create user '" + userName + "' with watch algorithm '" + algorithmType + "'";
     setErrorMsg(errorMsg);
@@ -83,7 +81,7 @@ BaseAction *CreateUser::clone() {
 }
 
 //Change Active User
-ChangeActiveUser::ChangeActiveUser(std::string &userName) : userName(userName), BaseAction() {
+ChangeActiveUser::ChangeActiveUser(std::string &userName) : userName(userName) {
     std::string errorMsg = "Could not change active user to " + userName;
     setErrorMsg(errorMsg);
 }
@@ -138,7 +136,7 @@ BaseAction *DuplicateUser::clone() {
 }
 
 //Delete User
-DeleteUser::DeleteUser(std::string &userName) : userName(userName), BaseAction() {
+DeleteUser::DeleteUser(std::string &userName) : userName(userName){
     std::string errorMsg = "Could not delete user: '" + userName + "'";
     setErrorMsg(errorMsg);
 }
@@ -162,7 +160,7 @@ BaseAction *DeleteUser::clone() {
 }
 
 //Print Content List
-PrintContentList::PrintContentList() : BaseAction() {
+PrintContentList::PrintContentList() {
 
     std::string error = "Could not print content list";
     setErrorMsg(error);
@@ -185,7 +183,7 @@ BaseAction *PrintContentList::clone() {
 }
 
 //Print Watch History
-PrintWatchHistory::PrintWatchHistory() : BaseAction() {
+PrintWatchHistory::PrintWatchHistory() {
     std::string errorMsg = "Could not print watch history";
     setErrorMsg(errorMsg);
 }
@@ -208,7 +206,7 @@ std::string PrintWatchHistory::toString() const {
 }
 
 //Print Actions Log
-PrintActionsLog::PrintActionsLog() : BaseAction() {
+PrintActionsLog::PrintActionsLog() {
     std::string errorMsg = "Could not print actions log";
     setErrorMsg(errorMsg);
 }
@@ -229,7 +227,7 @@ std::string PrintActionsLog::toString() const {
 }
 
 //Watch
-Watch::Watch(long id) : id(id), nextId(-1), keepWatching(false), BaseAction() {
+Watch::Watch(long id) : id(id), nextId(-1), keepWatching(false) {
     std::string errorMsg = "Could not stream content with id '" + std::to_string(id) + "'";
     setErrorMsg(errorMsg);
 }
@@ -296,7 +294,7 @@ void Watch::setNextId(long newNextId) {
 }
 
 //Exit
-Exit::Exit() : BaseAction() {
+Exit::Exit() {
     std::string errorMsg = "Could not exit the session";
     setErrorMsg(errorMsg);
 }

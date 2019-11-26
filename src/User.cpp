@@ -87,11 +87,11 @@ LengthRecommenderUser::LengthRecommenderUser(const std::string &name)
 }
 
 LengthRecommenderUser::LengthRecommenderUser(const LengthRecommenderUser &other)
-        : average(other.average), User(other) {
+        :  User(other), average(other.average) {
 }
 
 LengthRecommenderUser::LengthRecommenderUser(LengthRecommenderUser &&other)
-        : average(other.average), User(std::move(other)) {
+        : User(std::move(other)), average(other.average){
 }
 
 
@@ -146,16 +146,15 @@ void LengthRecommenderUser::recomputeAverage(int length) {
 
 //RERUN_RECOMMENEDED_USER
 RerunRecommenderUser::RerunRecommenderUser(const std::string &name)
-        : User(name) {
-    currentIndex = -1;
+        : User(name), currentIndex(-1) {
 }
 
 RerunRecommenderUser::RerunRecommenderUser(const RerunRecommenderUser &other)
-        : currentIndex(other.currentIndex), User(other) {
+        : User(other), currentIndex(other.currentIndex) {
 }
 
 RerunRecommenderUser::RerunRecommenderUser(RerunRecommenderUser &&other)
-        : currentIndex(other.currentIndex), User(std::move(other)) {
+        : User(std::move(other)), currentIndex(other.currentIndex) {
 }
 
 RerunRecommenderUser &RerunRecommenderUser::operator=(const RerunRecommenderUser &other) {
@@ -186,10 +185,6 @@ Watchable *RerunRecommenderUser::getRecommendation(Session &s) {
     return  history.at(currentIndex);
 }
 
-bool RerunRecommenderUser::rangeCheck(const int toCheck, const int begin, const int last) const {
-    return toCheck >= begin && toCheck <= last;
-}
-
 void RerunRecommenderUser::addToHistory(Watchable *watchable) {
     User::addToHistory(watchable);
     incrementCurrentIndex();
@@ -205,11 +200,11 @@ GenreRecommenderUser::GenreRecommenderUser(
 GenreRecommenderUser::~GenreRecommenderUser() = default;
 
 GenreRecommenderUser::GenreRecommenderUser(const GenreRecommenderUser &other)
-        : mostPopularTags(other.mostPopularTags), User(other) {
+        : User(other), mostPopularTags(other.mostPopularTags) {
 }
 
 GenreRecommenderUser::GenreRecommenderUser(GenreRecommenderUser &&other)
-        : mostPopularTags(other.mostPopularTags), User(std::move(other)) {
+        : User(std::move(other)), mostPopularTags(other.mostPopularTags) {
 }
 
 GenreRecommenderUser &GenreRecommenderUser::operator=(const GenreRecommenderUser &other) {

@@ -54,9 +54,8 @@ Watchable::~Watchable() = default;
 
 
 //MOVIE
-Movie::Movie(long id, const std::string &name, int length, const std::vector<std::string> &tags) : name(name),
-                                                                                                   Watchable(id, length,
-                                                                                                             tags) {}
+Movie::Movie(long id, const std::string &name, int length, const std::vector<std::string> &tags) : Watchable(id, length,
+                                                                                                             tags), name(name){}
 
 Movie::Movie(Movie &movie) = default;
 
@@ -99,8 +98,8 @@ std::string Movie::getName() const {
 
 //EPISODE
 Episode::Episode(long id, const std::string &seriesName, int length, int season, int episode,
-                 const std::vector<std::string> &tags) : seriesName(seriesName), season(season), episode(episode),
-                                                         nextEpisodeId(id + 1), Watchable(id, length, tags) {
+                 const std::vector<std::string> &tags) : Watchable(id, length, tags), seriesName(seriesName), season(season), episode(episode),
+                                                         nextEpisodeId(id + 1) {
 }
 
 Episode::Episode(Episode &other) = default;

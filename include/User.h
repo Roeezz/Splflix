@@ -119,14 +119,6 @@ public:
 
     virtual void addToHistory(Watchable *watchable);
 private:
-    /**
-     * A range check if
-     * @param toCheck the index to check.
-     * @param first index to check of history vector.
-     * @param last index to chack of history vector.
-     * @return boolean indicating if toCheck is in range.
-     */
-    bool rangeCheck(const int toCheck, const int first, const int last) const;
 
     int currentIndex;
 

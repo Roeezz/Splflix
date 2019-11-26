@@ -5,11 +5,11 @@
 #include "../include/User.h"
 #include <list>
 //constructors and assignments
-Session::Session(const std::string &configFilePath) : endSession(false), activeUser(nullptr), userMap() {
+Session::Session(const std::string &configFilePath) : content(), actionsLog(), userMap(), activeUser(nullptr), endSession(false){
     createContent(configFilePath);
 }
 
-Session::Session(const Session &other) {
+Session::Session(const Session &other) : content(), actionsLog(), userMap(), activeUser(nullptr), endSession(false) {
     copy(other);
 }
 
@@ -21,7 +21,7 @@ Session &Session::operator=(const Session &other) {
     return *this;
 }
 
-Session::Session(Session &&other) {
+Session::Session(Session &&other) : content(), actionsLog(), userMap(), activeUser(nullptr), endSession(false) {
     move(std::move(other));
 }
 
