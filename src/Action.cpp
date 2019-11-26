@@ -200,7 +200,7 @@ void PrintWatchHistory::act(Session &sess) {
     std::vector<Watchable *> history = sess.getActiveUser()->getHistory();
     std::string output = Session::watchableVectorToString(history);
     std::cout << sess.getActiveUser()->getName() << std::endl;
-    std::cout << output;
+    std::cout << output << std::endl;
     complete();
 }
 

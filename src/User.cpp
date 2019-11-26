@@ -273,5 +273,4 @@ void GenreRecommenderUser::addTags(Watchable *watchable) {
     for (auto &tag : watchable->getTags()) {
         addTag(tag);
     }
-
 }
