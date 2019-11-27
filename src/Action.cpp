@@ -6,29 +6,13 @@
 //Base Action
 
 //constructor
-BaseAction::BaseAction() : errorMsg("The action could not be completed") , status(PENDING) {}
+BaseAction::BaseAction() : errorMsg("The action could not be completed"), status(PENDING) {}
 
-//Public
+BaseAction::~BaseAction() = default;
+
+//Getters and Setters
 ActionStatus BaseAction::getStatus() const {
     return status;
-}
-
-//Protected
-std::string BaseAction::getErrorMsg() const {
-    return errorMsg;
-}
-
-void BaseAction::setErrorMsg(std::string &errorMsg) {
-    this->errorMsg = errorMsg;
-}
-
-void BaseAction::complete() {
-    this->status = COMPLETED;
-}
-
-void BaseAction::error(const std::string &errorMsg) {
-    this->status = ERROR;
-    std::cout << "Error - " + errorMsg << std::endl;
 }
 
 std::string BaseAction::getStatusMessage() const {
@@ -41,11 +25,28 @@ std::string BaseAction::getStatusMessage() const {
     return output;
 }
 
-BaseAction::~BaseAction() = default;
+//Protected
+std::string BaseAction::getErrorMsg() const {
+    return errorMsg;
+}
+
+void BaseAction::setErrorMsg(std::string &errorMsg) {
+    this->errorMsg = errorMsg;
+}
+
+//Status updating methods
+void BaseAction::complete() {
+    this->status = COMPLETED;
+}
+
+void BaseAction::error(const std::string &errorMsg) {
+    this->status = ERROR;
+    std::cout << "Error - " + errorMsg << std::endl;
+}
 
 //Create User
 CreateUser::CreateUser(const std::string &userName, const std::string &algorithmType) : userName(userName),
-                                                                                        algorithmType(algorithmType){
+                                                                                        algorithmType(algorithmType) {
 
     std::string errorMsg = "Could not create user '" + userName + "' with watch algorithm '" + algorithmType + "'";
     setErrorMsg(errorMsg);
@@ -65,7 +66,7 @@ void CreateUser::act(Session &sess) {
     }
     if (!sess.addUser(userName, newUser)) {
         error(getErrorMsg());
-        delete(newUser);
+        delete (newUser);
         newUser = nullptr;
         return;
     }
@@ -123,7 +124,7 @@ void DuplicateUser::act(Session &sess) {
             complete();
             return;
         }
-        delete(newUser);
+        delete (newUser);
         newUser = nullptr;
     }
     error(getErrorMsg());
@@ -140,7 +141,7 @@ BaseAction *DuplicateUser::clone() {
 }
 
 //Delete User
-DeleteUser::DeleteUser(std::string &userName) : userName(userName){
+DeleteUser::DeleteUser(std::string &userName) : userName(userName) {
     std::string errorMsg = "Could not delete user: '" + userName + "'";
     setErrorMsg(errorMsg);
 }
@@ -192,10 +193,6 @@ PrintWatchHistory::PrintWatchHistory() {
     setErrorMsg(errorMsg);
 }
 
-BaseAction *PrintWatchHistory::clone() {
-    return new PrintWatchHistory(*this);
-}
-
 void PrintWatchHistory::act(Session &sess) {
     std::vector<Watchable *> history = sess.getActiveUser()->getHistory();
     std::string output = Session::watchableVectorToString(history);
@@ -209,14 +206,14 @@ std::string PrintWatchHistory::toString() const {
     return output;
 }
 
+BaseAction *PrintWatchHistory::clone() {
+    return new PrintWatchHistory(*this);
+}
+
 //Print Actions Log
 PrintActionsLog::PrintActionsLog() {
     std::string errorMsg = "Could not print actions log";
     setErrorMsg(errorMsg);
-}
-
-BaseAction *PrintActionsLog::clone() {
-    return new PrintActionsLog(*this);
 }
 
 void PrintActionsLog::act(Session &sess) {
@@ -230,14 +227,14 @@ std::string PrintActionsLog::toString() const {
     return output;
 }
 
+BaseAction *PrintActionsLog::clone() {
+    return new PrintActionsLog(*this);
+}
+
 //Watch
 Watch::Watch(long id) : id(id), nextId(-1), keepWatching(false) {
     std::string errorMsg = "Could not stream content with id '" + std::to_string(id) + "'";
     setErrorMsg(errorMsg);
-}
-
-BaseAction *Watch::clone() {
-    return new Watch(*this);
 }
 
 void Watch::act(Session &sess) {
@@ -282,12 +279,13 @@ void Watch::newRecommendation(Session &sess, Watchable *const watched) {
     recommendation = nullptr;
 }
 
-long Watch::getNextId() const {
-    return nextId;
-}
-
 std::string Watch::toString() const {
     return "Watch " + getStatusMessage();
+}
+
+//Getters and setters
+long Watch::getNextId() const {
+    return nextId;
 }
 
 bool Watch::getKeepWatching() const {
@@ -298,14 +296,14 @@ void Watch::setNextId(long newNextId) {
     this->nextId = newNextId;
 }
 
+BaseAction *Watch::clone() {
+    return new Watch(*this);
+}
+
 //Exit
 Exit::Exit() {
     std::string errorMsg = "Could not exit the session";
     setErrorMsg(errorMsg);
-}
-
-BaseAction *Exit::clone() {
-    return new Exit(*this);
 }
 
 void Exit::act(Session &sess) {
@@ -316,4 +314,8 @@ void Exit::act(Session &sess) {
 std::string Exit::toString() const {
     std::string output = "Exit session " + getStatusMessage();
     return output;
+}
+
+BaseAction *Exit::clone() {
+    return new Exit(*this);
 }

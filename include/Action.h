@@ -25,6 +25,10 @@ public:
 
     virtual std::string toString() const = 0;
 
+    /**
+     * Virtual method. When implemented it creates a clone of this BaseAction derived class,
+     * then returns a pointer to it.
+     */
     virtual BaseAction *clone() = 0;
 
 protected:
@@ -62,6 +66,7 @@ public:
     virtual std::string toString() const;
 
     virtual BaseAction *clone();
+
 private:
     std::string userName;
     std::string algorithmType;
@@ -76,6 +81,7 @@ public:
     virtual std::string toString() const;
 
     virtual BaseAction *clone();
+
 private:
     std::string userName;
 };
@@ -89,6 +95,7 @@ public:
     virtual std::string toString() const;
 
     virtual BaseAction *clone();
+
 private:
     std::string userName;
 };
@@ -102,6 +109,7 @@ public:
     virtual std::string toString() const;
 
     virtual BaseAction *clone();
+
 private:
     std::string oldUserName;
     std::string newUserName;
@@ -115,7 +123,7 @@ public:
 
     virtual std::string toString() const;
 
-    virtual BaseAction* clone();
+    virtual BaseAction *clone();
 };
 
 class PrintWatchHistory : public BaseAction {
@@ -126,7 +134,7 @@ public:
 
     virtual std::string toString() const;
 
-    virtual BaseAction* clone();
+    virtual BaseAction *clone();
 };
 
 class Watch : public BaseAction {
@@ -143,7 +151,7 @@ public:
 
     void setNextId(long newNextId);
 
-    virtual BaseAction* clone();
+    virtual BaseAction *clone();
 
 private:
     long id;
@@ -161,7 +169,7 @@ public:
 
     virtual std::string toString() const;
 
-    virtual BaseAction* clone();
+    virtual BaseAction *clone();
 };
 
 class Exit : public BaseAction {
@@ -172,7 +180,7 @@ public:
 
     virtual std::string toString() const;
 
-    virtual BaseAction* clone();
+    virtual BaseAction *clone();
 };
 
 #endif

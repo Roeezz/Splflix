@@ -5,6 +5,7 @@
 //constructors and operators
 Watchable::Watchable(long id, int length, const std::vector<std::string> &tags) : id(id), length(length),
                                                                                   tags(tags) {}
+
 Watchable::Watchable(const Watchable &watchable) = default;
 
 Watchable &Watchable::operator=(const Watchable &other) {
@@ -55,7 +56,8 @@ Watchable::~Watchable() = default;
 
 //MOVIE
 Movie::Movie(long id, const std::string &name, int length, const std::vector<std::string> &tags) : Watchable(id, length,
-                                                                                                             tags), name(name){}
+                                                                                                             tags),
+                                                                                                   name(name) {}
 
 Movie::Movie(Movie &movie) = default;
 
@@ -68,7 +70,7 @@ Movie &Movie::operator=(const Movie &other) {
 }
 
 bool Movie::operator==(const Watchable &other) const {
-    if(Watchable::operator==(other)) {
+    if (Watchable::operator==(other)) {
         return getName() == other.getName();
     }
     return false;
@@ -98,7 +100,8 @@ std::string Movie::getName() const {
 
 //EPISODE
 Episode::Episode(long id, const std::string &seriesName, int length, int season, int episode,
-                 const std::vector<std::string> &tags) : Watchable(id, length, tags), seriesName(seriesName), season(season), episode(episode),
+                 const std::vector<std::string> &tags) : Watchable(id, length, tags), seriesName(seriesName),
+                                                         season(season), episode(episode),
                                                          nextEpisodeId(id + 1) {
 }
 
@@ -107,7 +110,7 @@ Episode::Episode(Episode &other) = default;
 Watchable *Episode::getNextWatchable(Session &sess) const {
     long nextId = getId() + 1;
     Watchable *next = sess.getWatchable(nextId);
-    if(next && getName() == next->getName()){
+    if (next && getName() == next->getName()) {
         return next;
     }
     return sess.getActiveUser()->getRecommendation(sess);
@@ -129,7 +132,7 @@ Episode &Episode::operator=(const Episode &other) {
 }
 
 bool Episode::operator==(const Watchable &other) const {
-    if(Watchable::operator==(other)){
+    if (Watchable::operator==(other)) {
         return (getName() == other.getName());
     }
     return false;

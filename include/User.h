@@ -31,13 +31,13 @@ public:
     //Destructor
     virtual ~User();
 
-    virtual User * clone(std::string &name) = 0;
+    virtual User *clone(std::string &name) = 0;
 
     virtual Watchable *getRecommendation(Session &s) = 0;
 
     std::string getName() const;
 
-    std::vector<Watchable *>const & getHistory() const;
+    std::vector<Watchable *> const &getHistory() const;
 
     bool isInHistory(const Watchable *) const;
 
@@ -69,15 +69,15 @@ public:
     LengthRecommenderUser(LengthRecommenderUser &&other);
 
     //assignment operator
-    LengthRecommenderUser& operator=(const LengthRecommenderUser& other);
+    LengthRecommenderUser &operator=(const LengthRecommenderUser &other);
 
     //move assignment operator
-    LengthRecommenderUser& operator=(LengthRecommenderUser&& other);
+    LengthRecommenderUser &operator=(LengthRecommenderUser &&other);
 
     //destructor
     virtual ~LengthRecommenderUser();
 
-    virtual User * clone(std::string &name);
+    virtual User *clone(std::string &name);
 
     virtual Watchable *getRecommendation(Session &s);
 
@@ -105,19 +105,20 @@ public:
     RerunRecommenderUser(RerunRecommenderUser &&other);
 
     //assignment operator
-    RerunRecommenderUser& operator=(const RerunRecommenderUser& other);
+    RerunRecommenderUser &operator=(const RerunRecommenderUser &other);
 
     //move assignmernt operator
-    RerunRecommenderUser& operator=(RerunRecommenderUser&& other);
+    RerunRecommenderUser &operator=(RerunRecommenderUser &&other);
 
     //destructor
     virtual ~RerunRecommenderUser();
 
-    virtual User * clone(std::string &name);
+    virtual User *clone(std::string &name);
 
     virtual Watchable *getRecommendation(Session &s);
 
     virtual void addToHistory(Watchable *watchable);
+
 private:
 
     int currentIndex;
@@ -137,15 +138,15 @@ public:
     GenreRecommenderUser(GenreRecommenderUser &&other);
 
     //assignment operator
-    GenreRecommenderUser& operator=(const GenreRecommenderUser& other);
+    GenreRecommenderUser &operator=(const GenreRecommenderUser &other);
 
     //move assignment operator
-    GenreRecommenderUser& operator=(GenreRecommenderUser&& other);
+    GenreRecommenderUser &operator=(GenreRecommenderUser &&other);
 
     //destructor
     virtual ~GenreRecommenderUser();
 
-    virtual User * clone(std::string &name);
+    virtual User *clone(std::string &name);
 
     virtual Watchable *getRecommendation(Session &s);
 
@@ -172,10 +173,10 @@ private:
      */
     void addTag(const std::string &tag);
 
-  /**
-   * adds all his tags to the mostPopularTags using addTag
-   * @param watchable
-   */
+    /**
+     * adds all his tags to the mostPopularTags using addTag
+     * @param watchable
+     */
     void addTags(Watchable *watchable);
 };
 

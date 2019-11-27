@@ -5,10 +5,10 @@
 
 //USER
 User::User(const std::string &name)
-        :history(), name(name) {}
+        : history(), name(name) {}
 
 User::User(const User &other)
-        :history(), name(other.name) {
+        : history(), name(other.name) {
     copy(other);
 }
 
@@ -21,7 +21,7 @@ User &User::operator=(const User &other) {
 }
 
 User::User(User &&other)
-        :history(), name(other.name) {
+        : history(), name(other.name) {
     move(std::move(other));
 }
 
@@ -42,8 +42,8 @@ std::string User::getName() const {
 }
 
 bool User::isInHistory(const Watchable *watchable) const {
-    for(const auto &content: history){
-        if(*content == *watchable)
+    for (const auto &content: history) {
+        if (*content == *watchable)
             return true;
     }
     return false;
@@ -82,15 +82,15 @@ void User::move(User &&other) {
 
 //LENGTH_RECOMMENDED_USER
 LengthRecommenderUser::LengthRecommenderUser(const std::string &name)
-        : User(name) , average (0) {
+        : User(name), average(0) {
 }
 
 LengthRecommenderUser::LengthRecommenderUser(const LengthRecommenderUser &other)
-        :  User(other), average(other.average) {
+        : User(other), average(other.average) {
 }
 
 LengthRecommenderUser::LengthRecommenderUser(LengthRecommenderUser &&other)
-        : User(std::move(other)), average(other.average){
+        : User(std::move(other)), average(other.average) {
 }
 
 
@@ -181,7 +181,7 @@ User *RerunRecommenderUser::clone(std::string &name) {
 }
 
 Watchable *RerunRecommenderUser::getRecommendation(Session &s) {
-    return  history.at(currentIndex);
+    return history.at(currentIndex);
 }
 
 void RerunRecommenderUser::addToHistory(Watchable *watchable) {

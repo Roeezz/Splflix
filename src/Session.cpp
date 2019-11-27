@@ -4,8 +4,10 @@
 #include "../include/json.hpp"
 #include "../include/User.h"
 #include <list>
-//constructors and assignments
-Session::Session(const std::string &configFilePath) : content(), actionsLog(), userMap(), activeUser(nullptr), endSession(false){
+
+//Constructors and assignments
+Session::Session(const std::string &configFilePath)
+        : content(), actionsLog(), userMap(), activeUser(nullptr), endSession(false) {
     createContent(configFilePath);
     createDefaultUser();
 }
@@ -38,7 +40,7 @@ Session::~Session() {
     clear();
 }
 
-//Create content and defalut user methods
+//Create content and default user methods
 void Session::createContent(const std::string &configFilePath) {
     std::fstream ifs(configFilePath);
     nlohmann::json j = nlohmann::json::parse(ifs);
@@ -49,7 +51,7 @@ void Session::createContent(const std::string &configFilePath) {
 }
 
 void Session::extractMoviesContent(nlohmann::json &j, long &id) {
-    id= 1;
+    id = 1;
     nlohmann::json movies = j["movies"];
     for (auto &mov : movies.items()) {
         nlohmann::json movie = mov.value();
@@ -85,12 +87,13 @@ void Session::createDefaultUser() {
 }
 
 
-//event loop
+//Event loop
 void Session::start() {
     std::cout << "SPLFLIX is now on!" << std::endl;
     eventLoop();
 }
-//-private methods
+
+//-Private event loop methods
 void Session::eventLoop() {
     setEndSession(false);
     std::string command;
@@ -127,7 +130,7 @@ void Session::actionChooser(const std::string &command) {
 }
 
 
-//actions
+//-Private actions methods
 void Session::createUser() {
     std::string userName, algorithmType;
     std::cin >> userName >> algorithmType;
@@ -306,7 +309,7 @@ void Session::copy(const Session &other) {
     }
     for (const auto &user : other.userMap) {
         std::string userName = user.first;
-        auto pair =std::make_pair(userName, user.second->clone(userName));
+        auto pair = std::make_pair(userName, user.second->clone(userName));
         this->userMap.insert(pair);
     }
 

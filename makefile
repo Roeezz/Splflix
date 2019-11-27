@@ -1,11 +1,11 @@
 # All Targets
-all: SplflixPrivate
+all: Splflix
 
 # Tool invocations
-SplflixPrivate: bin/Session.o bin/Action.o bin/User.o bin/Main.o bin/Watchable.o
+Splflix: bin/Session.o bin/Action.o bin/User.o bin/Main.o bin/Watchable.o
 	@echo 'Building target: Splflix'
 	@echo 'Invoking: C++ Linker'
-	g++ -o bin/rest bin/Session.o bin/Action.o bin/User.o bin/Main.o bin/Watchable.o
+	g++ -o bin/Splflix bin/Session.o bin/Action.o bin/User.o bin/Main.o bin/Watchable.o
 	@echo 'Finished building target: Splflix'
 	@echo ' '
 

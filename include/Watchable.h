@@ -34,7 +34,7 @@ public:
 
     virtual std::string toString() const = 0;
 
-    virtual Watchable* getNextWatchable(Session&) const = 0;
+    virtual Watchable *getNextWatchable(Session &) const = 0;
 
     bool checkInTags(const std::string &tag) const;
 
@@ -99,6 +99,7 @@ public:
     virtual ~Episode();
 
     virtual std::string getName() const;
+
 private:
     std::string seriesName;
     int season;

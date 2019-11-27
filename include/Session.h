@@ -24,13 +24,13 @@ public:
     Session(const Session &other);
 
     //Copy assignment
-    Session& operator=(const Session& other);
+    Session &operator=(const Session &other);
 
     //Move copy ctor
     Session(Session &&other);
 
     //Move copy assignment
-    Session& operator=(Session &&other);
+    Session &operator=(Session &&other);
 
     //Destructor
     ~Session();
@@ -57,11 +57,11 @@ public:
     Watchable *getWatchable(long &id);
 
     //Getters and Setters
-    std::vector<Watchable *> const& getContent() const;
+    std::vector<Watchable *> const &getContent() const;
 
-    std::vector<BaseAction *> const& getActionsLog() const;
+    std::vector<BaseAction *> const &getActionsLog() const;
 
-    std::unordered_map<std::string, User *>const& getUserMap() const;
+    std::unordered_map<std::string, User *> const &getUserMap() const;
 
     User *getActiveUser() const;
 
@@ -130,8 +130,6 @@ private:
     void printActionsLog();
 
     void exitSession();
-
-
 
     void watch(long &&recommendId);
 };
