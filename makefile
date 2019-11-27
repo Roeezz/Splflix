@@ -3,10 +3,10 @@ all: Splflix
 
 # Tool invocations
 Splflix: bin/Session.o bin/Action.o bin/User.o bin/Main.o bin/Watchable.o
-	@echo 'Building target: Splflix'
+	@echo 'Building target: splflix'
 	@echo 'Invoking: C++ Linker'
-	g++ -o bin/Splflix bin/Session.o bin/Action.o bin/User.o bin/Main.o bin/Watchable.o
-	@echo 'Finished building target: Splflix'
+	g++ -o bin/splflix bin/Session.o bin/Action.o bin/User.o bin/Main.o bin/Watchable.o
+	@echo 'Finished building target: splflix'
 	@echo ' '
 
 # Depends on the source and header files

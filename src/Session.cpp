@@ -101,7 +101,13 @@ void Session::eventLoop() {
         std::cout << "Please enter a command: ";
         std::cin >> command;
         actionChooser(command);
+        clearInputBuffer();
     }
+}
+
+void Session::clearInputBuffer() const {
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 void Session::actionChooser(const std::string &command) {
@@ -125,7 +131,6 @@ void Session::actionChooser(const std::string &command) {
         exitSession();
     } else {
         std::cout << "'" + command + "' is not a valid command" << std::endl;
-        std::cin.clear();
     }
 }
 
@@ -207,7 +212,7 @@ void Session::exitSession() {
 
 
 //newRecommendation methods
-//by length recommender
+//By length recommender
 Watchable *Session::GetRecommendationLength(const LengthRecommenderUser &user, const int average) {
     Watchable *recommended = nullptr;
     int closest = std::numeric_limits<int>::max();
@@ -220,7 +225,7 @@ Watchable *Session::GetRecommendationLength(const LengthRecommenderUser &user, c
     return recommended;
 }
 
-//by genre recommender
+//By genre recommender
 Watchable *Session::GetRecommendationGenre(const GenreRecommenderUser &user, const std::string &tag) {
 
     for (auto const &watchable_ptr : content) {
@@ -268,12 +273,12 @@ std::string Session::actionsLogToString() {
     return output;
 }
 
-//-private actionsLog method
+//-Private actionsLog method
 void Session::addActionToLog(BaseAction *action) {
     actionsLog.push_back(action);
 }
 
-//private
+//Private
 void Session::clear() {
     //clear content vector
     for (auto &watchable_ptr: content) {
@@ -337,7 +342,7 @@ void Session::move(Session &&other) {
     other.activeUser = nullptr;
 }
 
-//getters and setters
+//Getters and setters
 std::vector<Watchable *> const &Session::getContent() const {
     return content;
 }
@@ -350,7 +355,7 @@ std::unordered_map<std::string, User *> const &Session::getUserMap() const {
     return userMap;
 }
 
-User *Session::getActiveUser() const {
+User *const &Session::getActiveUser() const {
     return activeUser;
 }
 

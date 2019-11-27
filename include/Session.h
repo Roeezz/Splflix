@@ -63,7 +63,7 @@ public:
 
     std::unordered_map<std::string, User *> const &getUserMap() const;
 
-    User *getActiveUser() const;
+    User *const & getActiveUser() const;
 
     void setActiveUser(User *newUser);
 
@@ -132,6 +132,9 @@ private:
     void exitSession();
 
     void watch(long &&recommendId);
+
+    void clearInputBuffer() const;
+
 };
 
 #endif

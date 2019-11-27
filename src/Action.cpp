@@ -261,7 +261,7 @@ void Watch::act(Session &sess) {
 void Watch::newRecommendation(Session &sess, Watchable *const watched) {
     Watchable *recommendation = watched->getNextWatchable(sess);
     if (recommendation) {
-        std::cout << "We recommend watching " + recommendation->toString() + "[Y/N]";
+        std::cout << "We recommend watching " + recommendation->toString() + ", continue watching?[Y/N]";
         std::string answer;
         std::cin >> answer;
 
