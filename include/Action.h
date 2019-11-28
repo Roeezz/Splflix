@@ -76,6 +76,10 @@ class ChangeActiveUser : public BaseAction {
 public:
     ChangeActiveUser(std::string &userName);
 
+    /**
+     * Changes the active user to the user with the name userName if it exists.
+     * @param sess the session in which to change the user.
+     */
     virtual void act(Session &sess);
 
     virtual std::string toString() const;
@@ -90,6 +94,10 @@ class DeleteUser : public BaseAction {
 public:
     DeleteUser(std::string &userName);
 
+    /**
+     * Deletes the user with name userName if it exists.
+     * @param sess the session i which to delete the user.
+     */
     virtual void act(Session &sess);
 
     virtual std::string toString() const;
@@ -104,6 +112,11 @@ class DuplicateUser : public BaseAction {
 public:
     DuplicateUser(std::string &oldUserName, std::string &newUserName);
 
+    /**
+     * Finds the user with name oldUserName if it exists and creates a new user with name newUserName and
+     * adds it to the session if no other user with the same name exists.
+     * @param sess the Session to duplicate the user from.
+     */
     virtual void act(Session &sess);
 
     virtual std::string toString() const;
@@ -119,6 +132,10 @@ class PrintContentList : public BaseAction {
 public:
     PrintContentList();
 
+    /**
+     * Prints the the content list of given Session.
+     * @param sess the Session of which to print the content list.
+     */
     virtual void act(Session &sess);
 
     virtual std::string toString() const;

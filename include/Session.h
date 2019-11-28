@@ -54,7 +54,7 @@ public:
     void addActionToLog(BaseAction *action);
 
     //content methods
-    Watchable *getWatchable(long &id);
+    Watchable *getWatchable(const long &id);
 
     //Getters and Setters
     std::vector<Watchable *> const &getContent() const;

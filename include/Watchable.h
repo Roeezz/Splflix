@@ -19,18 +19,23 @@ public:
     //assignment operator
     Watchable &operator=(const Watchable &other);
 
+    //destructor
+    virtual ~Watchable();
+
     //isEqual operator
     virtual bool operator==(const Watchable &other) const;
 
     //Clone
     virtual Watchable *clone() = 0;
 
+    //Getters
     int getLength() const;
 
     long getId() const;
 
-    //destructor
-    virtual ~Watchable();
+    std::vector<std::string> const &getTags() const;
+
+    virtual std::string getName() const = 0;
 
     virtual std::string toString() const = 0;
 
@@ -43,9 +48,7 @@ public:
      */
     std::string tagsToString() const;
 
-    std::vector<std::string> const &getTags() const;
 
-    virtual std::string getName() const = 0;
 
 private:
     const long id;

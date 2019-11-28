@@ -113,7 +113,6 @@ LengthRecommenderUser &LengthRecommenderUser::operator=(LengthRecommenderUser &&
 LengthRecommenderUser::~LengthRecommenderUser() = default;
 
 /**
- *
  * @param s session
  * @return a pointer the next content to be recommended to the user
  */

@@ -2,7 +2,7 @@
 #include "../include/Session.h"
 
 //WATCHABLE
-//constructors and operators
+//Constructors, operators and destructor
 Watchable::Watchable(long id, int length, const std::vector<std::string> &tags) : id(id), length(length),
                                                                                   tags(tags) {}
 
@@ -20,13 +20,19 @@ bool Watchable::operator==(const Watchable &other) const {
     return id == other.id;
 }
 
-//getters
+Watchable::~Watchable() = default;
+
+//Getters
 int Watchable::getLength() const {
     return length;
 }
 
 long Watchable::getId() const {
     return id;
+}
+
+std::vector<std::string> const &Watchable::getTags() const {
+    return tags;
 }
 
 std::string Watchable::tagsToString() const {
@@ -41,17 +47,9 @@ std::string Watchable::tagsToString() const {
     return tagsString;
 }
 
-std::vector<std::string> const &Watchable::getTags() const {
-    return tags;
-}
-
 bool Watchable::checkInTags(const std::string &tag) const {
-
     return std::find(tags.begin(), tags.end(), tag) != tags.end();
-
 }
-
-Watchable::~Watchable() = default;
 
 
 //MOVIE
@@ -108,8 +106,7 @@ Episode::Episode(long id, const std::string &seriesName, int length, int season,
 Episode::Episode(Episode &other) = default;
 
 Watchable *Episode::getNextWatchable(Session &sess) const {
-    long nextId = getId() + 1;
-    Watchable *next = sess.getWatchable(nextId);
+    Watchable *next = sess.getWatchable(nextEpisodeId);
     if (next && getName() == next->getName()) {
         return next;
     }

@@ -227,17 +227,13 @@ Watchable *Session::GetRecommendationLength(const LengthRecommenderUser &user, c
 
 //By genre recommender
 Watchable *Session::GetRecommendationGenre(const GenreRecommenderUser &user, const std::string &tag) {
-
     for (auto const &watchable_ptr : content) {
         if (watchable_ptr->checkInTags(tag) && !user.isInHistory(watchable_ptr)) {
             return watchable_ptr;
         }
-
     }
     return nullptr;
-
 }
-
 
 //userMap methods
 User *Session::getUser(std::string &userName) {
@@ -388,7 +384,7 @@ void Session::setEndSession(bool set) {
     endSession = set;
 }
 
-Watchable *Session::getWatchable(long &id) {
+Watchable *Session::getWatchable(const long &id) {
     Watchable *watchable;
     try {
         (watchable = content.at(id - 1));
