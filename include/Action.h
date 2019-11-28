@@ -182,6 +182,10 @@ class PrintActionsLog : public BaseAction {
 public:
     PrintActionsLog();
 
+    /**
+     * prints the actions performed in the session
+     * @param sess
+     */
     virtual void act(Session &sess);
 
     virtual std::string toString() const;
@@ -193,6 +197,10 @@ class Exit : public BaseAction {
 public:
     Exit();
 
+    /**
+     * sets getEndSession field of the session to true.
+     * @param sess
+     */
     virtual void act(Session &sess);
 
     virtual std::string toString() const;

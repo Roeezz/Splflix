@@ -112,6 +112,7 @@ LengthRecommenderUser &LengthRecommenderUser::operator=(LengthRecommenderUser &&
 
 LengthRecommenderUser::~LengthRecommenderUser() = default;
 
+
 /**
  * @param s session
  * @return a pointer the next content to be recommended to the user
@@ -120,11 +121,7 @@ Watchable *LengthRecommenderUser::getRecommendation(Session &s) {
     return s.GetRecommendationLength(*this, average);
 }
 
-/**
- * Creates a clone of this user with a new name.
- * @param name the name of the new user.
- * @return the created clone.
- */
+
 User *LengthRecommenderUser::clone(std::string &name) {
     auto *clone = new LengthRecommenderUser(name);
     *clone = *this;

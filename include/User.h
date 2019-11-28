@@ -31,14 +31,29 @@ public:
     //Destructor
     virtual ~User();
 
+    /**
+    * Creates a clone of this user with a new name.
+    * @param name the name of the new user.
+    * @return the created clone.
+    */
     virtual User *clone(std::string &name) = 0;
 
+    /**
+     *
+     * @param s a session
+     * @return a watchable pointer to be recommended to the active user
+     * (based on the algorithm chosen)
+     */
     virtual Watchable *getRecommendation(Session &s) = 0;
 
     std::string getName() const;
 
     std::vector<Watchable *> const &getHistory() const;
 
+    /**
+     * @param a pointer to a watchable
+     * @return true if it exists in the user's history
+     */
     bool isInHistory(const Watchable *) const;
 
     virtual void addToHistory(Watchable *watchable);
@@ -117,9 +132,15 @@ public:
 
     virtual Watchable *getRecommendation(Session &s);
 
+    /**
+     *
+     * @param watchable pointer
+     * adds the pointer to the history vector.
+     */
     virtual void addToHistory(Watchable *watchable);
 
 private:
+
 
     int currentIndex;
 
@@ -156,8 +177,10 @@ private:
     //keeps for each user its most popular tags
     std::vector<std::pair<int, std::string>> mostPopularTags;
 
-    // Driver function to sort the vector elements by
-    // first element of pair in descending order and if two are equal - by lexicographic order of the second
+    /**
+     * Driver function to sort the vector elements by
+    first element of pair in descending order and if two are equal - by lexicographic order of the second
+     */
     static bool sortInRevLex(const std::pair<int, std::string> &p1, const std::pair<int, std::string> &p2);
 
     /**

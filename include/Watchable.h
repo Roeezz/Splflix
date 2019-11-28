@@ -39,6 +39,11 @@ public:
 
     virtual std::string toString() const = 0;
 
+    /**
+     * @param a session
+     * @return the next watchable to be recommended to the user
+     *
+     */
     virtual Watchable *getNextWatchable(Session &) const = 0;
 
     bool checkInTags(const std::string &tag) const;
@@ -69,6 +74,12 @@ public:
 
     virtual std::string toString() const;
 
+    /**
+     * @param a session
+     * @return the next watchable to be recommended to the active user
+     * based on the algorithm the active user chose.
+     *
+     */
     virtual Watchable *getNextWatchable(Session &) const;
 
     virtual Watchable *clone();
@@ -95,6 +106,13 @@ public:
 
     virtual std::string toString() const;
 
+    /**
+    * @param a session
+    * @return the next watchable to be recommended to the active user.
+    * If there is a next episode in the series - recommend that episode
+    * else - return a recommendation based on the active user's algorithm.
+    *
+    */
     virtual Watchable *getNextWatchable(Session &) const;
 
     virtual Watchable *clone();
